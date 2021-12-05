@@ -1,13 +1,11 @@
 #include <Wire.h>
-int vall11;
-float val2;
+int ValeurEntrer;
+float ValeurFinal;
 
 void setup()
 {
   Serial.begin(9600);
-  Serial.println("Emartee.com");
-  Serial.println ("tension:") ;
-  Serial.print("V") ;
+  Serial.println ("tension en Volt(V):") ;
 
 }
 
@@ -15,15 +13,15 @@ void loop()
 
 {
 
-  float temp ;
+  float temps ;
 
-  vall11=analogRead(1) ;
+  ValeurEntrer=analogRead(1) ;
 
-  temp = vall11/4.092 ;
+  temps = ValeurEntrer/4.092 ;
 
-  val2=(temp/10) ;
+  ValeurFinal=(temps/10) ;
 
-  Serial.println(val2) ;
+  Serial.println(ValeurFinal) ;
 
   delay(1000) ;
 
