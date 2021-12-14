@@ -17,7 +17,7 @@ void loop()
 
   ValeurEntrer=analogRead(1) ;
 
-  temps = ValeurEntrer/4.092 ;
+  temps = ValeurEntrer/3.98 ;
 
   ValeurFinal=(temps/10) ;
 
