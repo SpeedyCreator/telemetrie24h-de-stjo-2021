@@ -1,9 +1,7 @@
 #include <Wire.h>
 #include <SoftwareSerial.h> 
 
-int ValeurEntrer;
-float ValeurVolt;
-int ValeurPourcent;
+float tension;
 int ThermistorPin = A0;
 unsigned long last_time=0;
 int update_interval=100;
@@ -17,7 +15,6 @@ SoftwareSerial HC06(7,8);  // pin7 Tx / pin8 Rx
 void setup()
 {
   Serial.begin(9600);
-  Serial.println ("tension en Volt(V):") ;
   HC06.begin(9600);
 
 }
@@ -25,31 +22,21 @@ void setup()
 void loop()
 
 {
-  //Calcule temperature
   Vo = analogRead(ThermistorPin);
   R2 = R1 * (1023.0 / (float)Vo - 1.0);
   logR2 = log(R2);
   T = (1.0 / (c1 + c2*logR2 + c3*logR2*logR2*logR2));
   Tc = T - 273.15;
-
-  //Calcule tensions
-  float temps ;
-  ValeurEntrer=analogRead(1) ;
-  temps = ValeurEntrer/3.98 ;
-  ValeurVolt=(temps/10) ;
-  ValeurPourcent= ValeurVolt*100/8.17;
   
-  //affichage tensions
-  Serial.println(ValeurVolt);
-  HC06.print("*V");
-  HC06.print(ValeurVolt);
-  HC06.print("*P");
-  HC06.print(ValeurPourcent);
 
-  //Affichage temperature
-  HC06.print("*Z");
+  tension = analogRead(1)/41.00;
+
+  HC06.print(tension);
+  HC06.print("*T");
+  Serial.println(tension);
+
   HC06.print(Tc);
-
-  delay(1000) ;
-
+  HC06.print("*Z");
+  delay(1000);
+  
 }
