@@ -10,7 +10,7 @@ void setup() {
 
 void loop() {
   
-  valeuranalog = analogRead(termor);
+  valeuranalog = analogRead(0);
 
   Serial.println(valeuranalog);
   delay(1000);
